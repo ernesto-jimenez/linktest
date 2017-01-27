@@ -1,0 +1,43 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Example</title>
+  <script type="text/javascript" charset="utf-8">
+    nothing
+  </script>
+  <script src="example/javascript.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="http://ok.test/style.css" type="text/css" media="all" />
+  <link rel="canonical" href="http://localhost" />
+</head>
+<body>
+  <img src="logo.svg" alt=""/>
+  <script src="in-body.js" type="text/javascript" charset="utf-8"></script>
+  <picture>
+    <source media="(min-width: 650px)" srcset="images/kitten-stretching.png, images/kitten-stretching@1.5x.png 1.5x,  images/kitten-stretching@2x.png 2x">
+    <source media="(min-width: 465px)" srcset="images/kitten-sitting.png, images/kitten-sitting@1.5x.png 1.5x images/kitten-sitting@2x.png 2x">
+    <img src="images/kitten-curled.png" srcset="images/kitten-curled@1.5x.png 1.5x, images/kitten-curled@2x.png 2x" alt="a cute kitten">
+  </picture>
+  <picture>
+    <source media="(min-width: 650px)" srcset="images/kitten-stretching.png">
+    <source media="(min-width: 465px)" srcset="images/kitten-sitting.png">
+    <img src="images/kitten-curled.png" alt="a cute kitten">
+  </picture>
+  <picture>
+    <source type="image/webp" srcset="images/butterfly.webp">
+    <img src="images/butterfly.jpg" alt="a butterfly">
+  </picture>
+  <video src="video.webm" controls>
+  </video>
+  <video controls>
+    <source src="devstories.webm" type='video/webm;codecs="vp8, vorbis"'/>
+    <source src="devstories.mp4" type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'/>
+    <source src="devstories.webm#t=10,20" type='video/webm;codecs="vp8, vorbis"' />
+  </video>
+  <source src="ignored">
+  <video controls style="width:640px;height:360px;" poster="poster.png">
+    <source src="devstories.webm" type='video/webm;codecs="vp8, vorbis"' />
+    <source src="devstories.mp4" type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' />
+    <track src="devstories-en.vtt" label="English subtitles" kind="subtitles" srclang="en" default></track>
+  </video>
+</body>
+</html>

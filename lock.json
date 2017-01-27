@@ -1,0 +1,29 @@
+{
+    "memo": "442f01b8f63cae2fe9005fb2bd735679e986c9b63bde3f43a86556e194103847",
+    "projects": [
+        {
+            "name": "github.com/ernesto-jimenez/crawler",
+            "branch": "master",
+            "revision": "529e1d0e85a9fc944b3972dad3fc68c61cdd8e92",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/ernesto-jimenez/httplogger",
+            "branch": "master",
+            "revision": "86cc44f6150a7e9dca8586e425a9c73e71f8ae7d",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "golang.org/x/net",
+            "branch": "master",
+            "revision": "f2499483f923065a842d38eb4c7f1927e6fc6e6d",
+            "packages": [
+                "html"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "dependencies": {
+        "github.com/ernesto-jimenez/crawler": {
+            "branch": "master"
+        },
+        "github.com/ernesto-jimenez/httplogger": {
+            "branch": "master"
+        }
+    }
+}
