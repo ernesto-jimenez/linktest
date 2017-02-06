@@ -4,7 +4,7 @@
         {
             "name": "github.com/ernesto-jimenez/crawler",
             "branch": "master",
-            "revision": "529e1d0e85a9fc944b3972dad3fc68c61cdd8e92",
+            "revision": "8254029bbd238fe3bb37ff54825ac7ec0a9f5b1e",
             "packages": [
                 "."
             ]
@@ -20,7 +20,7 @@
         {
             "name": "golang.org/x/net",
             "branch": "master",
-            "revision": "f2499483f923065a842d38eb4c7f1927e6fc6e6d",
+            "revision": "236b8f043b920452504e263bc21d354427127473",
             "packages": [
                 "html"
             ]

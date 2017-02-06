@@ -57,15 +57,14 @@ func main() {
 		startURL = s.URL
 	}
 
-	if _, err := url.Parse(startURL); err != nil {
+	start, err := url.Parse(startURL)
+	if err != nil {
 		log.Fatal(err)
 	}
 
 	cr, err := crawler.New(
 		crawler.WithHTTPClient(client),
-		crawler.WithCheckFetch(func(u *url.URL) bool {
-			return strings.HasPrefix(u.String(), startURL)
-		}),
+		crawler.WithAllowedHosts(start.Host),
 	)
 	if err != nil {
 		log.Fatal(err)
@@ -85,7 +84,13 @@ func main() {
 
 	err = cr.Crawl(startURL, func(url string, res *crawler.Response, err error) error {
 		if err != nil {
-			return err
+			failures = append(failures, failure{
+				inURL: "",
+				err:   err,
+				kind:  "page",
+				res:   strings.TrimPrefix(url, startURL),
+			})
+			return nil
 		}
 		if verbose {
 			log.Printf("%s - Links: %d Assets: %d", url, len(res.Links), len(res.Assets))

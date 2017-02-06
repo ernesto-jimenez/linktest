@@ -1,10 +1,10 @@
 package crawler
 
 import (
+	"context"
 	"errors"
 	"net/http"
 	"net/http/httptest"
-	"net/url"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -48,8 +48,8 @@ func TestMaxDepth(t *testing.T) {
 }
 
 func TestCheckFetch(t *testing.T) {
-	c, err := New(WithCheckFetch(func(u *url.URL) bool {
-		return u.Path == "/depth-one.html"
+	c, err := New(WithCheckFetch(func(req *Request) bool {
+		return req.URL.Path == "/depth-one.html"
 	}))
 	require.NoError(t, err)
 
@@ -114,9 +114,6 @@ func TestCrawlInvalidStartHost(t *testing.T) {
 }
 
 func TestFetch(t *testing.T) {
-	c, err := New()
-	require.NoError(t, err)
-
 	s := httptest.NewServer(http.FileServer(http.Dir("testdata")))
 	defer s.Close()
 
@@ -135,7 +132,7 @@ func TestFetch(t *testing.T) {
 			req, err := NewRequest(s.URL + test.path)
 			require.NoError(t, err)
 
-			res, err := c.fetch(req)
+			res, err := fetch(context.Background(), http.DefaultClient, req)
 			require.NoError(t, err)
 
 			require.Equal(t, test.expectedURL, res.URL)

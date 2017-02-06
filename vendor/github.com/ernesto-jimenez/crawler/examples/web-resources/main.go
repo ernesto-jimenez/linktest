@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"net/url"
 	"os"
 	"strings"
 	"time"
@@ -51,22 +50,20 @@ func main() {
 		log.Fatal("specify a start URL")
 	}
 
-	if includeHosts == "" {
-		u, err := url.Parse(startURL)
-		if err != nil {
-			log.Fatal(err)
-		}
-		includeHosts = u.Host
-	}
-
-	cr, err := crawler.New(
+	opts := []crawler.Option{
 		crawler.WithHTTPClient(&http.Client{
 			Transport: httplogger.DefaultLoggedTransport,
 			Timeout:   5 * time.Second,
 		}),
 		crawler.WithMaxDepth(maxDepth),
-		crawler.WithCheckFetch(hostCheck(includeHosts, excludeHosts)),
-	)
+		crawler.WithExcludedHosts(strings.Split(excludeHosts, ",")...),
+	}
+
+	if includeHosts != "" {
+		opts = append(opts, crawler.WithAllowedHosts(strings.Split(includeHosts, ",")...))
+	}
+
+	cr, err := crawler.New(opts...)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -104,34 +101,5 @@ func main() {
 	err = enc.Encode(result)
 	if err != nil {
 		log.Fatal(err)
-	}
-}
-
-func hostCheck(includeHosts, excludeHosts string) func(u *url.URL) bool {
-	includedHosts := make(map[string]bool)
-	for _, host := range strings.Split(includeHosts, ",") {
-		host = strings.TrimSpace(host)
-		includedHosts[host] = true
-	}
-
-	excludedHosts := make(map[string]bool)
-	for _, host := range strings.Split(excludeHosts, ",") {
-		host = strings.TrimSpace(host)
-		excludedHosts[host] = true
-	}
-
-	return func(u *url.URL) bool {
-		if excludedHosts[u.Host] {
-			log.Printf("excluded: %s", u.String())
-			return false
-		}
-		if len(includedHosts) == 0 {
-			return true
-		}
-		if !includedHosts[u.Host] {
-			log.Printf("not included: %s", u.String())
-			return false
-		}
-		return true
 	}
 }
