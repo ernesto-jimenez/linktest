@@ -10,7 +10,6 @@ install:
   - # Skip
 
 script:
-  - go get -t -v ./...
   - diff -u <(echo -n) <(gofmt -d .)
-  - go tool vet .
-  - go test -v -race ./...
+  - go tool vet *.go
+  - make test
