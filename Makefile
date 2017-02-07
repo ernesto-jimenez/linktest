@@ -1,7 +1,7 @@
 # The import path is where your repository can be found.
 # To import subpackages, always prepend the full import path.
 # If you change this, run `make clean`. Read more: https://git.io/vM7zV
-IMPORT_PATH := github.com/ernesto-jimenez/linkcheck
+IMPORT_PATH := github.com/ernesto-jimenez/linktest
 
 # V := 1 # When V is set, print commands and build progress.
 
